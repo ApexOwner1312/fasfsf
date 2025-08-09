@@ -4,7 +4,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-// ESM-friendly __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(async () => ({
@@ -19,12 +18,12 @@ export default defineConfig(async () => ({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "client", "src"),
+      "@": path.resolve(__dirname, "main"), // change if your code isn't in src
       "@shared": path.resolve(__dirname, "shared"),
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
-  root: path.resolve(__dirname, "client"), // Make sure this folder exists
+  root: __dirname, // use repo root for index.html
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
